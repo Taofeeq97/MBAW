@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Django migrations (ignore all except __init__.py)
+**/migrations/*
+!**/migrations/__init__.py
+
+# Environment variables
+.env
+
+# VS Code settings (optional)
+.vscode/
+
+# Mac system files (optional)
+.DS_Store
+
+# PyCharm project files (optional)
+.idea/
+
+# Log files
+*.log
