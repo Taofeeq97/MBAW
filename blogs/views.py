@@ -17,7 +17,7 @@ class BlogCreateView(CreateAPIView):
 
 
 class BlogListView(ListAPIView):
-    queryset = Blog.objects.all()
+    queryset = Blog.objects.all()[:6]
     serializer_class = BlogSerializer
     permission_classes = [AllowAny]
     pagination_class = BlogPagination

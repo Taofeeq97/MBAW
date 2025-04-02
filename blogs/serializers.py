@@ -14,7 +14,8 @@ class BlogSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
             'created_by',
-            'uploaded_by'
+            'uploaded_by',
+            'image'
         ]
 
     def get_uploaded_by(self, obj):
