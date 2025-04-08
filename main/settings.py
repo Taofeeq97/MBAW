@@ -77,7 +77,8 @@ CORS_ALLOWED_ORIGINS = [
 "https://made-by-akin-frontend.vercel.app",
 "http://made-by-akin-frontend.vercel.app",
 "http://made-by-akin-frontend.vercel.app",
-"http://localhost:5173"
+"http://localhost:5173",
+"https://web-production-23be0.up.railway.app"
 ]
 
 
