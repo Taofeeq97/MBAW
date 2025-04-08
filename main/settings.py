@@ -81,6 +81,20 @@ CORS_ALLOWED_ORIGINS = [
 "https://web-production-23be0.up.railway.app"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+"http://localhost:3000",
+"http://127.0.0.1:3000",
+"http://localhost:8000",
+"http://127.0.0.1:8000",
+"https://made-by-akin-frontend.vercel.app",
+"https://made-by-akin-frontend.vercel.app",
+"http://made-by-akin-frontend.vercel.app",
+"http://made-by-akin-frontend.vercel.app",
+"http://localhost:5173",
+"https://web-production-23be0.up.railway.app"
+]
+
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
