@@ -22,3 +22,16 @@ class Blog(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class Subscriber(models.Model):
+    email = models.EmailField(max_length=254, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        ordering = ['-created_at']
+
+
