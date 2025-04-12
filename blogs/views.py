@@ -135,7 +135,7 @@ class ContactUsView(APIView):
             email = EmailMultiAlternatives(
                 subject=f"New Contact Form Submission: {context['subject']}",
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                to=['otutaofeeqi@gmail.com'],
+                to=['otutaofeeqi@gmail.com', 'olatubosunoluwaseyi1@gmail.com'],
                 reply_to=[context['email']]
             )
             email.attach_alternative(html_content, "text/html")
