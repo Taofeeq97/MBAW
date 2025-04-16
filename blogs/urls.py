@@ -5,7 +5,8 @@ from blogs.views import (
     BlogDeleteView, SubscriberListView,
     SubscriberCreateView, SubscriberUpdateView,
     SubscriberDeleteView, SubscriberDetailView, 
-    UserCreateView, ContactUsView
+    UserCreateView, ContactUsView, JobApplicationView
+
 )
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -27,4 +28,5 @@ urlpatterns = [
     path('subscribers/<int:pk>/delete/', SubscriberDeleteView.as_view(), name='subscriber-delete'),
     path('subscribers/<int:pk>/', SubscriberDetailView.as_view(), name='subscriber-detail'),
     path('contact-us/', ContactUsView.as_view(), name='contact-us'),
+    path('apply-job/', JobApplicationView.as_view(), name='apply_job'),
 ]

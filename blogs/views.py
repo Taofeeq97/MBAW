@@ -8,9 +8,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ContactUsSerializer
 
-from blogs.models import Blog, Subscriber
+from blogs.models import Blog, Subscriber, JobApplication
 from blogs.pagination import CustomPagination
-from blogs.serializers import BlogSerializer, SubscriberSerializer, UserSerializer
+from blogs.serializers import BlogSerializer, SubscriberSerializer, UserSerializer, JobApplicationSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
 
@@ -143,3 +143,47 @@ class ContactUsView(APIView):
             
             return Response({"message": "Thank you for contacting us!"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class JobApplicationView(APIView):
+    def post(self, request):
+        serializer = JobApplicationSerializer(data=request.data)
+        if serializer.is_valid():
+            # Save the job application
+            job_application = serializer.save()
+            
+            # Prepare context for email template
+            context = {
+                'job_title': job_application.job_title,
+                'full_name': job_application.full_name,
+                'email': job_application.email,
+                'phone_number': job_application.phone_number,
+                'cover_letter': job_application.cover_letter,
+                'resume_url': request.build_absolute_uri(job_application.resume.url),
+                'subject': f"Job Application for {job_application.job_title}"
+            }
+            
+            html_content = render_to_string('job_application.html', context)
+            email = EmailMultiAlternatives(
+                subject=f"New Job Application: {job_application.job_title}",
+                body=f"New job application received from {job_application.full_name}",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=['otutaofeeqi@gmail.com', 'olatubosunoluwaseyi1@gmail.com'],
+                reply_to=[job_application.email]
+            )
+            email.attach_alternative(html_content, "text/html")
+            try:
+                email.send()
+                return Response({
+                    'message': 'Your job application has been submitted successfully!',
+                    'data': serializer.data
+                }, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({
+                    'message': 'Your job application has been submitted, but there was an issue sending the notification email.',
+                    'data': serializer.data
+                }, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            

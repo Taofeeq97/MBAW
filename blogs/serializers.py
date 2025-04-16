@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from blogs.models import Blog, Subscriber
+from blogs.models import Blog, Subscriber, JobApplication
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
@@ -72,3 +72,12 @@ class ContactUsSerializer(serializers.Serializer):
             return value.lower()
         except ValidationError:
             raise serializers.ValidationError("Please enter a valid email address.")
+        
+
+class JobApplicationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model=JobApplication
+        fields = '__all__'
+
+        

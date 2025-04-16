@@ -35,3 +35,15 @@ class Subscriber(models.Model):
         ordering = ['-created_at']
 
 
+
+class JobApplication(models.Model):
+    job_title = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+    cover_letter = models.TextField(null=True, blank=True)
+    resume = models.FileField(upload_to='resume')
+
+    def __str__(self):
+        return f"{self.job_title} job application by {self.full_name}"
+
